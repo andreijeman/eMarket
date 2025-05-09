@@ -14,7 +14,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     
     public async Task<T?> GetAsync(int id)
     {
-        return await _context.Set<T>().FindAsync();
+        return await _context.Set<T>().FindAsync(id);
     }
 
     public async Task<T> AddAsync(T entity)

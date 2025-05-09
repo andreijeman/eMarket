@@ -1,9 +1,9 @@
 using eMarket.Application.DTOs.Product;
-using MediatR;
+using eMarket.Application.Patterns.Mediator;
 
 namespace eMarket.Application.Feature.Product.Requests.Queries;
 
-public class GetProductListQuery : IRequest<List<ProductListDto>>
+public class GetProductListRequest : IRequest<IEnumerable<ProductListDto>>
 {
     public int Start { get; set; }
     public int Count { get; set; }
