@@ -6,20 +6,20 @@ using eMarket.Application.Patterns.Mediator;
 
 namespace eMarket.Application.Feature.Product.Handlers.Queries;
 
-public class GetProductListRequestHandler : IRequestHandler<GetProductListRequest, IEnumerable<ProductListDto>>
+public class GetProductListQueryHandler : IRequestHandler<GetProductListQuery, IEnumerable<ProductListDto>>
 {
     private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
 
-    public GetProductListRequestHandler(IProductRepository productRepository, IMapper mapper)
+    public GetProductListQueryHandler(IProductRepository productRepository, IMapper mapper)
     {
         _productRepository = productRepository;
         _mapper = mapper;
     }
     
-    public async Task<IEnumerable<ProductListDto>> Handle(GetProductListRequest request)
+    public async Task<IEnumerable<ProductListDto>> Handle(GetProductListQuery query)
     {
-        var products = await _productRepository.GetRangeAsync(request.Start, request.Count);
+        var products = await _productRepository.GetRangeAsync(query.Skip, query.Take);
         
         return _mapper.Map<IEnumerable<ProductListDto>>(products);
     }

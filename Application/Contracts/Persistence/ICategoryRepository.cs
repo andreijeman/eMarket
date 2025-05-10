@@ -4,4 +4,5 @@ namespace eMarket.Application.Contracts.Persistence;
 
 public interface ICategoryRepository : IGenericRepository<Category>
 {
+    Task<ICollection<Category>> GetByIdsAsync(IEnumerable<int> ids);
 }

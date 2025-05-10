@@ -1,12 +1,13 @@
 using eMarket.Application.DTOs.Product;
+using eMarket.Application.Feature.Product.Requests.Commands;
 using eMarket.Application.Feature.Product.Requests.Queries;
 using eMarket.Application.Patterns.Mediator;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eMarket.WebApi.Controllers;
 
-[ApiController]
 [Route("api/[controller]")]
+[ApiController]
 public class ProductController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -16,21 +17,27 @@ public class ProductController : ControllerBase
         _mediator = mediator;
     }
     
-    [HttpGet("/{id:int}")]
-    public async Task<IActionResult> GetAsync(int id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetAsync([FromRoute] int id)
     { 
-        var request = new GetProductRequest { Id = id };
-        var response = await _mediator.Send<GetProductRequest, ProductDto>(request);
-        
+        var query = new GetProductQuery { Id = id };
+        var response = await _mediator.Send<GetProductQuery, ProductDto>(query);
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetListAsync([FromQuery] int start, [FromQuery] int count)
+    public async Task<IActionResult> GetListAsync([FromQuery] int skip,  [FromQuery] int take)
     { 
-        var request = new GetProductListRequest { Start = start, Count = count };
-        var response = await _mediator.Send<GetProductListRequest, IEnumerable<ProductListDto>>(request);
-        
+        var query = new GetProductListQuery { Skip = skip, Take = take};
+        var response = await _mediator.Send<GetProductListQuery, IEnumerable<ProductListDto>>(query);
+        return Ok(response);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> CreateAsync([FromForm] CreateProductDto createProductDto)
+    {
+        var command = new CreateProductCommand { CreateProductDto = createProductDto };
+        var response = await _mediator.Send<CreateProductCommand, int>(command); 
         return Ok(response);
     }
 }

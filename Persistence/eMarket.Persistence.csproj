@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\eMarket.Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Migrations\" />
   </ItemGroup>
 
@@ -34,6 +30,10 @@
     <Reference Include="Microsoft.Extensions.Configuration">
       <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.12\Microsoft.Extensions.Configuration.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\eMarket.Application.csproj" />
   </ItemGroup>
 
 </Project>

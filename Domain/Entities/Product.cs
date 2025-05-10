@@ -5,8 +5,8 @@ namespace eMarket.Domain.Entities;
 public class Product : BaseEntity
 {
     public required string Name { get; set; }
-    public decimal Price { get; set; }
-    public string? DetailPageUrl { get; set; }
-    public ICollection<string>? ImagesUrl { get; set; }
-    public required ICollection<Category> Categories { get; set; }
+    public required decimal Price { get; set; }
+    public string? Description { get; set; }
+    public ICollection<string> ImageUrls { get; set; } = new List<string>();
+    public ICollection<Category> Categories { get; set; } = new List<Category>();
 }

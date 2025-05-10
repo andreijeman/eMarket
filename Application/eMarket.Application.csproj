@@ -13,12 +13,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Contracts\Infrastructure\" />
-    <Folder Include="Feature\Product\Handlers\Commands\" />
-    <Folder Include="Feature\Product\Requests\Commands\" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.4" />
   </ItemGroup>
 
 </Project>

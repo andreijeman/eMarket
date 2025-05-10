@@ -7,22 +7,22 @@ using eMarket.Application.Patterns.Mediator;
 
 namespace eMarket.Application.Feature.Product.Handlers.Queries;
 
-public class GetProductRequestHandler : IRequestHandler<GetProductRequest, ProductDto>
+public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ProductDto>
 {
     private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
 
-    public GetProductRequestHandler(IProductRepository productRepository, IMapper mapper)
+    public GetProductQueryHandler(IProductRepository productRepository, IMapper mapper)
     {
         _productRepository = productRepository;
         _mapper = mapper;
     }
     
-    public async Task<ProductDto> Handle(GetProductRequest request)
+    public async Task<ProductDto> Handle(GetProductQuery query)
     {
-        var product = await _productRepository.GetAsync(request.Id);
+        var product = await _productRepository.GetByIdAsync(query.Id);
         
-        if(product is null) throw new NotFoundException(nameof(Product), request.Id);
+        if(product is null) throw new NotFoundException(nameof(Product), query.Id);
         
         return _mapper.Map<ProductDto>(product);
     }

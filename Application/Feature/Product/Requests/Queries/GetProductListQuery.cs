@@ -3,7 +3,8 @@ using eMarket.Application.Patterns.Mediator;
 
 namespace eMarket.Application.Feature.Product.Requests.Queries;
 
-public class GetProductRequest : IRequest<ProductDto>
+public class GetProductListQuery : IRequest<IEnumerable<ProductListDto>>
 {
-    public int Id { get; set; }
+    public int Skip { get; set; }
+    public int Take { get; set; }
 }

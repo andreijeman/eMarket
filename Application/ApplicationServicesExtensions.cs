@@ -1,14 +1,16 @@
 using System.Reflection;
 using eMarket.Application.DTOs.Category;
 using eMarket.Application.DTOs.Product;
+using eMarket.Application.Feature.Product.Handlers.Commands;
 using eMarket.Application.Feature.Product.Handlers.Queries;
+using eMarket.Application.Feature.Product.Requests.Commands;
 using eMarket.Application.Feature.Product.Requests.Queries;
 using eMarket.Application.Patterns.Mediator;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace eMarket.Application;
 
-public static class ApplicationServiceExtensions
+public static class ApplicationServicesExtensions
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
@@ -21,8 +23,9 @@ public static class ApplicationServiceExtensions
     private static IServiceCollection AddMediator(this IServiceCollection services)
     {
         services.AddScoped<IMediator, Mediator>(); 
-        services.AddTransient<IRequestHandler<GetProductRequest, ProductDto>, GetProductRequestHandler>();
-        services.AddTransient<IRequestHandler<GetProductListRequest, IEnumerable<ProductListDto>>, GetProductListRequestHandler>();
+        services.AddTransient<IRequestHandler<GetProductQuery, ProductDto>, GetProductQueryHandler>();
+        services.AddTransient<IRequestHandler<GetProductListQuery, IEnumerable<ProductListDto>>, GetProductListQueryHandler>();
+        services.AddTransient<IRequestHandler<CreateProductCommand, int>, CreateProductCommandHandler>();
         
         return services;
     }

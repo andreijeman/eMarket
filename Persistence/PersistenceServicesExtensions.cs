@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace eMarket.Persistence;
 
-public static class PersistenceServiceExtensions
+public static class PersistenceServicesExtensions
 {
     public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eMarket.Persistence;
 
@@ -10,9 +11,11 @@ using eMarket.Persistence;
 namespace eMarket.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250509222953_LinuxMigration")]
+    partial class LinuxMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,11 +71,10 @@ namespace eMarket.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Description")
+                    b.Property<string>("DetailPageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.PrimitiveCollection<string>("ImageUrls")
-                        .IsRequired()
+                    b.PrimitiveCollection<string>("ImagesUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -90,21 +92,18 @@ namespace eMarket.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            ImageUrls = "[]",
                             Name = "Product 1",
                             Price = 7m
                         },
                         new
                         {
                             Id = 2,
-                            ImageUrls = "[]",
                             Name = "Product 2",
                             Price = 13m
                         },
                         new
                         {
                             Id = 3,
-                            ImageUrls = "[]",
                             Name = "Product 3",
                             Price = 4m
                         });
