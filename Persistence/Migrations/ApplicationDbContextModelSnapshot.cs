@@ -56,7 +56,22 @@ namespace eMarket.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "My Category"
+                            Name = "Laptop"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "audio"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "fashion"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "home"
                         });
                 });
 
@@ -71,7 +86,7 @@ namespace eMarket.Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.PrimitiveCollection<string>("ImageUrls")
+                    b.PrimitiveCollection<string>("Images")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -85,29 +100,6 @@ namespace eMarket.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ImageUrls = "[]",
-                            Name = "Product 1",
-                            Price = 7m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ImageUrls = "[]",
-                            Name = "Product 2",
-                            Price = 13m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ImageUrls = "[]",
-                            Name = "Product 3",
-                            Price = 4m
-                        });
                 });
 
             modelBuilder.Entity("CategoryProduct", b =>

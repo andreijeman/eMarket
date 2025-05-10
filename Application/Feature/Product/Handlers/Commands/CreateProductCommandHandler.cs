@@ -7,18 +7,16 @@ namespace eMarket.Application.Feature.Product.Handlers.Commands;
 
 public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
 {
-    private readonly IMediator _mediator;
     private readonly IProductRepository _productRepository;
     private readonly ICategoryRepository _categoryRepository;
-    private readonly string _imageUploadPath;
+    private readonly IConfiguration _configuration;
 
-    public CreateProductCommandHandler(IMediator mediator, IProductRepository productRepository, 
-        ICategoryRepository categoryRepository, IConfiguration config)
+    public CreateProductCommandHandler(IProductRepository productRepository, 
+        ICategoryRepository categoryRepository, IConfiguration configuration)
     {
-        _mediator = mediator;
         _productRepository = productRepository;
         _categoryRepository = categoryRepository;
-        _imageUploadPath = config.GetSection("FileStorage")["ImageUploadPath"] ?? "";
+        _configuration = configuration;
     }
         
     public async Task<int> Handle(CreateProductCommand request)
@@ -27,18 +25,18 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
         
         var categories = await _categoryRepository.GetByIdsAsync(dto.CategoryIds);
         
-        var imageUrls = new List<string>();
+        var images = new List<string>();
         
         foreach (var image in dto.Images)
         {
             var fileName = Guid.NewGuid() + Path.GetExtension(image.FileName);
-            var path = Path.Combine(_imageUploadPath, fileName);
-            var fullPath = Path.Combine(Directory.GetCurrentDirectory(), path);
+            var relativePath = Path.Combine(_configuration["FileStorage:ImageUploadPath"]!, fileName);
+            var fullPath = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
 
             await using var stream = new FileStream(fullPath, FileMode.Create);
             await image.CopyToAsync(stream);
 
-            imageUrls.Add(path);
+            images.Add(fileName);
         }
 
         var product = new Domain.Entities.Product
@@ -46,7 +44,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
             Name = dto.Name,
             Price = dto.Price,
             Description = dto.Description,
-            ImageUrls = imageUrls,
+            Images = images,
             Categories = categories
         };
 

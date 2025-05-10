@@ -7,7 +7,7 @@ public class ProductDto : BaseDto
 {
     public required string Name { get; set; }
     public decimal Price { get; set; }
-    public string? DetailPageUrl { get; set; }
-    public IEnumerable<string>? ImagesUrl { get; set; }
-    public required IEnumerable<CategoryDto> Categories { get; set; }
+    public string? Description { get; set; }
+    public IEnumerable<string> ImageUrls { get; set; } = new List<string>();
+    public required IEnumerable<CategoryListDto> Categories { get; set; } = new List<CategoryListDto>();
 }

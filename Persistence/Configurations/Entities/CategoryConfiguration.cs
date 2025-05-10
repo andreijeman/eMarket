@@ -12,8 +12,22 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
             new Category
             {
                 Id = 1,
-                Name = "My Category",
-                Products = new List<Product>()
+                Name = "Laptop",
+            },
+            new Category
+            {
+                Id = 2,
+                Name = "Audio",
+            },
+            new Category
+            {
+                Id = 3,
+                Name = "Fashion",
+            },
+            new Category
+            {
+                Id = 4,
+                Name = "Home",
             });
     }
 }

@@ -10,6 +10,13 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
     }
 
+    public override async Task<Product?> GetAsync(int id)
+    {
+        return await _context.Products
+            .Include(p => p.Categories)
+            .FirstAsync(p => p.Id == id);
+    }
+    
     public async Task<IEnumerable<Product>> GetRangeAsync(int start, int count)
     {
       return await _context.Products.Skip(start).Take(count).ToListAsync();

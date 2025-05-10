@@ -26,6 +26,8 @@ public static class ApplicationServicesExtensions
         services.AddTransient<IRequestHandler<GetProductQuery, ProductDto>, GetProductQueryHandler>();
         services.AddTransient<IRequestHandler<GetProductListQuery, IEnumerable<ProductListDto>>, GetProductListQueryHandler>();
         services.AddTransient<IRequestHandler<CreateProductCommand, int>, CreateProductCommandHandler>();
+        services.AddTransient<IRequestHandler<CreateCategoryCommand, int>, CreateCategoryCommandHandler>();
+        services.AddTransient<IRequestHandler<GetAllCategoriesQuery, IEnumerable<CategoryListDto>>, GetAllCategoriesQueryHandler>();
         
         return services;
     }

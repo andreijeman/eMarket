@@ -16,4 +16,9 @@ public class CategoryRepository : GenericRepository<Category>, ICategoryReposito
             .Where(c => ids.Contains(c.Id))
             .ToListAsync();
     }
+
+    public async Task<IEnumerable<Category>> GetAllAsync()
+    {
+        return await _context.Categories.ToListAsync();
+    }
 }

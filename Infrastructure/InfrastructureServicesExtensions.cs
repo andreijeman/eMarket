@@ -14,7 +14,7 @@ public static class InfrastructureServicesExtensions
 
     private static IServiceCollection AddFileStorage(this IServiceCollection services, IConfiguration config)
     {
-        var relativePath = config.GetSection("FileStorage")["ImageUploadPath"] ?? "";
+        var relativePath = config["FileStorage:ImageUploadPath"] ?? "";
         var absolutePath = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
         Directory.CreateDirectory(absolutePath);
         

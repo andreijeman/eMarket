@@ -11,8 +11,8 @@ using eMarket.Persistence;
 namespace eMarket.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250509222953_LinuxMigration")]
-    partial class LinuxMigration
+    [Migration("20250510143108_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,7 +59,22 @@ namespace eMarket.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "My Category"
+                            Name = "Laptop"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "audio"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "fashion"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "home"
                         });
                 });
 
@@ -71,10 +86,11 @@ namespace eMarket.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("DetailPageUrl")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.PrimitiveCollection<string>("ImagesUrl")
+                    b.PrimitiveCollection<string>("Images")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -87,26 +103,6 @@ namespace eMarket.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Product 1",
-                            Price = 7m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Product 2",
-                            Price = 13m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Product 3",
-                            Price = 4m
-                        });
                 });
 
             modelBuilder.Entity("CategoryProduct", b =>

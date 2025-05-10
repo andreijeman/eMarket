@@ -33,8 +33,8 @@ namespace eMarket.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DetailPageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImagesUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Images = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,13 +66,14 @@ namespace eMarket.Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "DetailPageUrl", "ImagesUrl", "Name", "Price" },
+                table: "Categories",
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, null, null, "Product 1", 7m },
-                    { 2, null, null, "Product 2", 13m },
-                    { 3, null, null, "Product 3", 4m }
+                    { 1, "Laptop" },
+                    { 2, "audio" },
+                    { 3, "fashion" },
+                    { 4, "home" }
                 });
 
             migrationBuilder.CreateIndex(
