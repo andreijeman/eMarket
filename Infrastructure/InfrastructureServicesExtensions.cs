@@ -9,6 +9,7 @@ public static class InfrastructureServicesExtensions
     {
         services.AddFileStorage(config);
         
+        
         return services;
     }
 

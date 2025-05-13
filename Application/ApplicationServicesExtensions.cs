@@ -5,6 +5,8 @@ using eMarket.Application.Feature.Product.Handlers.Commands;
 using eMarket.Application.Feature.Product.Handlers.Queries;
 using eMarket.Application.Feature.Product.Requests.Commands;
 using eMarket.Application.Feature.Product.Requests.Queries;
+using eMarket.Application.Feature.User.Handlers;
+using eMarket.Application.Feature.User.Requests;
 using eMarket.Application.Patterns.Mediator;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,6 +30,7 @@ public static class ApplicationServicesExtensions
         services.AddTransient<IRequestHandler<CreateProductCommand, int>, CreateProductCommandHandler>();
         services.AddTransient<IRequestHandler<CreateCategoryCommand, int>, CreateCategoryCommandHandler>();
         services.AddTransient<IRequestHandler<GetAllCategoriesQuery, IEnumerable<CategoryListDto>>, GetAllCategoriesQueryHandler>();
+        services.AddTransient<IRequestHandler<LoginUserCommand, string>, LoginUserCommandHandler>();
         
         return services;
     }
