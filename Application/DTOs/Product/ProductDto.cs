@@ -1,10 +1,10 @@
 ﻿using eMarket.Application.DTOs.Category;
-using eMarket.Application.DTOs.Common;
 
 namespace eMarket.Application.DTOs.Product;
 
-public class ProductDto : BaseDto
+public class ProductDto
 {
+    public int Id { get; set; }
     public required string Name { get; set; }
     public decimal Price { get; set; }
     public string? Description { get; set; }

@@ -1,9 +1,9 @@
 using eMarket.Application.Contracts.Persistence;
-using eMarket.Application.Feature.Product.Requests.Commands;
+using eMarket.Application.Feature.Product.Requests;
 using eMarket.Application.Patterns.Mediator;
 using Microsoft.Extensions.Configuration;
 
-namespace eMarket.Application.Feature.Product.Handlers.Commands;
+namespace eMarket.Application.Feature.Product.Handlers;
 
 public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
 {
@@ -21,13 +21,11 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
         
     public async Task<int> Handle(CreateProductCommand request)
     {
-        var dto = request.CreateProductDto;
-        
-        var categories = await _categoryRepository.GetByIdsAsync(dto.CategoryIds);
+        var categories = await _categoryRepository.GetByIdsAsync(request.CategoryIds);
         
         var images = new List<string>();
         
-        foreach (var image in dto.Images)
+        foreach (var image in request.Images)
         {
             var fileName = Guid.NewGuid() + Path.GetExtension(image.FileName);
             var relativePath = Path.Combine(_configuration["FileStorage:ImageUploadPath"]!, fileName);
@@ -41,9 +39,9 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
 
         var product = new Domain.Entities.Product
         {
-            Name = dto.Name,
-            Price = dto.Price,
-            Description = dto.Description,
+            Name = request.Name,
+            Price = request.Price,
+            Description = request.Description,
             Images = images,
             Categories = categories
         };

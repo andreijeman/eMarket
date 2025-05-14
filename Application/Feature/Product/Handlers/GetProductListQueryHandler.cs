@@ -1,10 +1,10 @@
 using eMarket.Application.Contracts.Persistence;
 using eMarket.Application.DTOs.Product;
-using eMarket.Application.Feature.Product.Requests.Queries;
+using eMarket.Application.Feature.Product.Requests;
 using eMarket.Application.Patterns.Mediator;
 using Microsoft.Extensions.Configuration;
 
-namespace eMarket.Application.Feature.Product.Handlers.Queries;
+namespace eMarket.Application.Feature.Product.Handlers;
 
 public class GetProductListQueryHandler : IRequestHandler<GetProductListQuery, IEnumerable<ProductListDto>>
 {

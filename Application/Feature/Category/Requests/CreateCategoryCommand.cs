@@ -1,8 +1,6 @@
-using eMarket.Application.DTOs.Category;
 using eMarket.Application.Patterns.Mediator;
-using eMarket.Domain.Entities;
 
-namespace eMarket.Application.Feature.Product.Requests.Commands;
+namespace eMarket.Application.Feature.Category.Requests;
 
 public class CreateCategoryCommand : IRequest<int>
 {

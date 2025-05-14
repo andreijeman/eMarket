@@ -1,10 +1,10 @@
 using AutoMapper;
 using eMarket.Application.Contracts.Persistence;
 using eMarket.Application.DTOs.Category;
-using eMarket.Application.Feature.Product.Requests.Queries;
+using eMarket.Application.Feature.Category.Requests;
 using eMarket.Application.Patterns.Mediator;
 
-namespace eMarket.Application.Feature.Product.Handlers.Queries;
+namespace eMarket.Application.Feature.Category.Handlers;
 
 public class GetAllCategoriesQueryHandler :  IRequestHandler<GetAllCategoriesQuery, IEnumerable<CategoryListDto>>
 {

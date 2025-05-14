@@ -20,13 +20,15 @@ public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, string>
 
     public async Task<string> Handle(LoginUserCommand request)
     {
-        var user = await _userRepository.GetByEmail(request.Email);
+        var user = await _userRepository.GetByEmailAsync(request.Email);
         
-        var passwordHash = new PasswordHasher<Domain.Entities.User>()
-            .HashPassword(user, request.Password);
+        if(user is null) throw new ApplicationException("Wrong password or email");
+        
+        var result = new PasswordHasher<Domain.Entities.User>()
+            .VerifyHashedPassword(user, user.PasswordHash, request.Password);
 
-        if (user.PasswordHash != passwordHash)
-            throw new ApplicationException("Wrong password or email"); 
+        if (result == PasswordVerificationResult.Failed)
+            throw new ApplicationException("Wrong password or email");
 
         return _jwtService.GenerateToken(user);
     }

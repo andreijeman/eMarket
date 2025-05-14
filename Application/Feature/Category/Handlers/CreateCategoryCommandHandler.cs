@@ -1,10 +1,9 @@
 using AutoMapper;
 using eMarket.Application.Contracts.Persistence;
-using eMarket.Application.Feature.Product.Requests.Commands;
+using eMarket.Application.Feature.Category.Requests;
 using eMarket.Application.Patterns.Mediator;
-using eMarket.Domain.Entities;
 
-namespace eMarket.Application.Feature.Product.Handlers.Commands;
+namespace eMarket.Application.Feature.Category.Handlers;
 
 public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, int>
 {
@@ -19,7 +18,7 @@ public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComman
     
     public async Task<int> Handle(CreateCategoryCommand request)
     {
-        var category = await _categoryRepository.AddAsync(new Category { Name =  request.Name });
+        var category = await _categoryRepository.AddAsync(new Domain.Entities.Category { Name =  request.Name });
         return category.Id;
     }
 }

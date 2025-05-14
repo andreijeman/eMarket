@@ -1,9 +1,13 @@
-using eMarket.Application.DTOs.Product;
 using eMarket.Application.Patterns.Mediator;
+using Microsoft.AspNetCore.Http;
 
-namespace eMarket.Application.Feature.Product.Requests.Commands;
+namespace eMarket.Application.Feature.Product.Requests;
 
 public class CreateProductCommand : IRequest<int>
 {
-    public required CreateProductDto CreateProductDto { get; set; }
+    public required string Name { get; set; }
+    public required decimal Price { get; set; }
+    public string? Description { get; set; }
+    public ICollection<IFormFile> Images { get; set; } = new  List<IFormFile>();
+    public ICollection<int> CategoryIds { get; set; } = new  List<int>();
 }

@@ -1,7 +1,7 @@
 using eMarket.Application.DTOs.Product;
 using eMarket.Application.Patterns.Mediator;
 
-namespace eMarket.Application.Feature.Product.Requests.Queries;
+namespace eMarket.Application.Feature.Product.Requests;
 
 public class GetProductQuery : IRequest<ProductDto>
 {
