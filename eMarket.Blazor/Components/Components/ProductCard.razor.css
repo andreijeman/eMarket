@@ -1,0 +1,24 @@
+.card {
+    width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-family: sans-serif;
+}
+.card-img {
+    width: 100%;
+    height: auto;
+}
+.card-content {
+    padding: 16px;
+}
+.product-name {
+    font-size: 18px;
+    margin: 0 0 8px;
+    font-weight: bold;
+}
+.product-price {
+    color: #2ecc71;
+    font-size: 16px;
+}

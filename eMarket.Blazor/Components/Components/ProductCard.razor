@@ -1,0 +1,23 @@
+@using eMarket.Application.DTOs.Product
+
+<Card Class="mb-4" Style="width:18rem;">
+    <img class="rounded-top" src="@GetImageUrl()" alt="placeholder" />
+    <CardBody>
+        <CardTitle>@Product.Name</CardTitle>
+        <CardText>@Product.Price</CardText>
+        
+        <Button Color="ButtonColor.Primary" To="@($"product/{Product.Id}")" >Go somewhere</Button>
+    </CardBody>
+</Card>
+
+@code {
+
+    [Parameter]
+    public required ProductListDto Product { get; set; }
+    
+    private string GetImageUrl()
+    {
+        return string.IsNullOrEmpty(Product.ImageUrl) ? "/images/no-image-available.png" : Product.ImageUrl;
+
+    }
+}

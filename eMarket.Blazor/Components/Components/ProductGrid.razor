@@ -1,0 +1,12 @@
+@using eMarket.Application.DTOs.Product
+
+<CardGroup>
+    @foreach (var product in Products)
+    {
+        <ProductCard Product="@product" />
+    }
+</CardGroup>
+
+@code {
+    [Parameter] public List<ProductListDto> Products { get; set; } = new();
+}

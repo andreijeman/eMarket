@@ -7,6 +7,6 @@ namespace eMarket.Persistence.Configurations.Entities;
 public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> builder)
-    {
+    { 
     }
 }

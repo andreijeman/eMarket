@@ -33,7 +33,7 @@ public class GetProductListQueryHandler : IRequestHandler<GetProductListQuery, I
             };
 
             if (product.Images.Count > 0)
-                dto.ImageUrl = Path.Combine(_configuration["FileStorage:BaseUrl"]!, product.Images.First());
+                dto.ImageUrl = Path.Combine(_configuration["FileStorage:BaseUrl"]!, product.Images.First().FileName);
             
             dtos.Add(dto);
         }

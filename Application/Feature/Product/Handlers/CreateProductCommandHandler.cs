@@ -23,7 +23,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
     {
         var categories = await _categoryRepository.GetByIdsAsync(request.CategoryIds);
         
-        var images = new List<string>();
+        var imageNames = new List<string>();
         
         foreach (var image in request.Images)
         {
@@ -34,7 +34,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
             await using var stream = new FileStream(fullPath, FileMode.Create);
             await image.CopyToAsync(stream);
 
-            images.Add(fileName);
+            imageNames.Add(fileName);
         }
 
         var product = new Domain.Entities.Product
@@ -42,7 +42,9 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
             Name = request.Name,
             Price = request.Price,
             Description = request.Description,
-            Images = images,
+            Images = imageNames.
+                Select(e => new Domain.Entities.ProductImage { FileName = e}).
+                ToList(),
             Categories = categories
         };
 

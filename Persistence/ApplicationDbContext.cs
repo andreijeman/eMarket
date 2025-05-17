@@ -1,5 +1,6 @@
 using eMarket.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eMarket.Persistence;
 

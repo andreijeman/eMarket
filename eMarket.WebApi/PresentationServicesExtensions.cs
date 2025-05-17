@@ -1,10 +1,21 @@
+using System.Reflection;
 using Microsoft.OpenApi.Models;
 
 namespace eMarket.WebApi;
 
 public static class PresentationServicesExtensions
 {
-    public static IServiceCollection AddPresentationServices(this IServiceCollection services)
+    public static IServiceCollection AddPresentation(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddControllers();
+        services.AddSwaggerGen();
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddSwaggerGenSecurity();
+        
+        return services;
+    }
+
+    private static void AddSwaggerGenSecurity(this IServiceCollection services)
     {
         services.AddSwaggerGen(options =>
         {
@@ -31,7 +42,18 @@ public static class PresentationServicesExtensions
                 }
             });
         });
-        
-        return services;
+    }
+
+    private static void AddBlazorCors(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddCors(options =>
+        {
+            options.AddPolicy(configuration["Cors:Blazor:Name"]!, policy =>
+            {
+                policy.WithOrigins(configuration["Cors:Blazor:Origins"]!)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+        });
     }
 }

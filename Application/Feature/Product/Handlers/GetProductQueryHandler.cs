@@ -29,7 +29,7 @@ public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ProductDt
         
         var dto = _mapper.Map<ProductDto>(product);
         dto.ImageUrls = product.Images
-            .Select(img => Path.Combine(_configuration["FileStorage:BaseUrl"]!, img))
+            .Select(img => Path.Combine(_configuration["FileStorage:BaseUrl"]!, img.FileName))
             .ToList();
         
         return dto;

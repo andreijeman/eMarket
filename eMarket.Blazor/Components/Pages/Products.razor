@@ -1,0 +1,64 @@
+@page "/products"
+@using eMarket.Application.DTOs.Product
+@using eMarket.Blazor.Components.Components
+@inject HttpClient Http
+@rendermode InteractiveServer
+
+<h2>Products</h2>
+
+@if (_products == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <ProductGrid Products="@_products" />
+
+    <div class="pagination">
+        @for (int i = 1; i <= _totalPages; i++)
+        {
+            <button @onclick="@(() => GoToPage(i))" class="@(i == _currentPage ? "active" : "")">@i</button>
+        }
+
+        @if (_currentPage < _totalPages)
+        {
+            <button @onclick="NextPage">Next</button>
+        }
+    </div>
+}
+
+@code {
+    private List<ProductListDto>? _products;
+    private int _currentPage = 1;
+    private readonly int _pageSize = 8;
+    private int _totalPages = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProducts();
+    }
+
+    private async Task LoadProducts()
+    {
+        int totalCount = await Http.GetFromJsonAsync<int>("api/product/count");
+        _totalPages = (int)Math.Ceiling(totalCount / (double)_pageSize);
+
+        int skip = (_currentPage - 1) * _pageSize;
+        _products = await Http.GetFromJsonAsync<List<ProductListDto>>($"api/product/range?skip={skip}&take={_pageSize}");
+    }
+
+    private async Task GoToPage(int page)
+    {
+        _currentPage = page;
+        await LoadProducts();
+    }
+
+    private async Task NextPage()
+    {
+        if (_currentPage < _totalPages)
+        {
+            _currentPage++;
+            await LoadProducts();
+        }
+    }
+}

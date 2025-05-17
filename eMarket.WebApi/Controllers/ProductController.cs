@@ -49,4 +49,11 @@ public class ProductController : ControllerBase
         var response = await _mediator.Send<CreateProductCommand, int>(command); 
         return Ok(response);
     }
+
+    [HttpGet("count")]
+    public async Task<IActionResult> CountAsync()
+    {
+        var response = await _mediator.Send<GetProductCountQuery, int>(new GetProductCountQuery());
+        return Ok(response);
+    }
 }
