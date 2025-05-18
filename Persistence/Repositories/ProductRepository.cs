@@ -13,7 +13,8 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
     public override async Task<Product?> GetAsync(int id)
     {
         return await _context.Products
-            .Include(p => p.Categories)
+            .Include(e => e.Categories)
+            .Include(e => e.Images)
             .FirstAsync(p => p.Id == id);
     }
     

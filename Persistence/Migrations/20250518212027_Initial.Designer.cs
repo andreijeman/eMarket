@@ -11,8 +11,8 @@ using eMarket.Persistence;
 namespace eMarket.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250513152625_AddUser")]
-    partial class AddUser
+    [Migration("20250518212027_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,28 +54,6 @@ namespace eMarket.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Laptop"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Audio"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Fashion"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Home"
-                        });
                 });
 
             modelBuilder.Entity("eMarket.Domain.Entities.Product", b =>
@@ -89,10 +67,6 @@ namespace eMarket.Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.PrimitiveCollection<string>("Images")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -103,6 +77,28 @@ namespace eMarket.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("eMarket.Domain.Entities.ProductImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImage");
                 });
 
             modelBuilder.Entity("eMarket.Domain.Entities.User", b =>
@@ -147,6 +143,20 @@ namespace eMarket.Persistence.Migrations
                         .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("eMarket.Domain.Entities.ProductImage", b =>
+                {
+                    b.HasOne("eMarket.Domain.Entities.Product", null)
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("eMarket.Domain.Entities.Product", b =>
+                {
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

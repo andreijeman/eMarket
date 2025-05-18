@@ -1,0 +1,26 @@
+﻿@page
+@model eMarket.Web.Pages.ProductListModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <h2>Product List</h2>
+    <ul>
+        @foreach (var product in Model.Products)
+        {
+            <li>@product.Name</li>
+        }
+    </ul>
+
+</div>
+</body>
+</html>
