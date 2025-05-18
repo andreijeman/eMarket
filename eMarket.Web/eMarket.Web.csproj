@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Application\eMarket.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="wwwroot\css\product-list.css" />
+    </ItemGroup>
+
 </Project>

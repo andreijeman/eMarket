@@ -20,7 +20,9 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
     
     public async Task<IEnumerable<Product>> GetRangeAsync(int start, int count)
     {
-      return await _context.Products.Skip(start).Take(count).ToListAsync();
+      return await _context.Products
+          .Include(e => e.Images)
+          .Skip(start).Take(count).ToListAsync();
     }
 
     public async Task<int> CountAsync()
