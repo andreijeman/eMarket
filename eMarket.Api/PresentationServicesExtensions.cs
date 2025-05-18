@@ -1,6 +1,6 @@
 using Microsoft.OpenApi.Models;
 
-namespace eMarket.WebApi;
+namespace eMarket.Api;
 
 public static class PresentationServicesExtensions
 {

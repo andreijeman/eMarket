@@ -3,7 +3,7 @@ using eMarket.Application.Feature.User.Requests;
 using eMarket.Application.Patterns.Mediator;
 using Microsoft.AspNetCore.Mvc;
 
-namespace eMarket.WebApi.Controllers;
+namespace eMarket.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

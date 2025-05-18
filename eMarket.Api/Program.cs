@@ -2,7 +2,7 @@ using System.Reflection;
 using eMarket.Application;
 using eMarket.Persistence;
 using eMarket.Infrastructure;
-using eMarket.WebApi;
+using eMarket.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 

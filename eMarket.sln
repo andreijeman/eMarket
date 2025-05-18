@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{598C026D-8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{537E590D-05F5-43A7-967E-6D179E57828D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eMarket.WebApi", "eMarket.WebApi\eMarket.WebApi.csproj", "{461C6024-3DED-44E1-B591-900E1F5B6246}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eMarket.Api", "eMarket.Api\eMarket.Api.csproj", "{461C6024-3DED-44E1-B591-900E1F5B6246}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{0BA2246B-DA5C-423F-AEEC-7C58EC22EAF8}"
 EndProject
