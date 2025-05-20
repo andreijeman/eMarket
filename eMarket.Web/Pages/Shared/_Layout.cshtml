@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - eMarket.Web</title>
+    <style>
+        * {
+            color: #404040;
+        }
+        .container {
+            display: flex;
+            gap: 30px;
+        }
+
+        .item {
+            font-size: 26px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="container">
+        <a class="item" asp-area="" asp-page="/Index">eMarket</a>
+        <a class="item" asp-area="" asp-page="/Login">Login</a>
+        <a class="item" asp-area="" asp-page="/Register">Register</a>
+        <a class="item" asp-area="" asp-page="/AllProducts">AllProducts</a>
+        <a class="item" asp-area="" asp-page="/MyProducts">MyProducts</a>
+    </nav>
+    <hr/>
+</header>
+<div>
+    <main role="main">
+        @RenderBody()
+    </main>
+</div>
+
+</body>
+</html>

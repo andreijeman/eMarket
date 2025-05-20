@@ -1,0 +1,38 @@
+﻿@page
+@using eMarket.Web.Pages
+@model eMarket.Web.Pages.AllProducts
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>AllProducts</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); 
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .grid-item {
+            text-align: center;
+            border: 1px solid;
+            width: 200px;
+            height: 300px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="grid-container">
+    @foreach (var product in Model.Products)
+    {
+        <div class="grid-item">
+            <img src="@product.ImageUrl" alt="product"/>
+            <p>@product.Name</p>
+        </div>
+    }
+</div>
+</body>
+</html>
