@@ -5,7 +5,7 @@
 namespace eMarket.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedData : Migration
+    public partial class Seed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,8 +38,8 @@ namespace eMarket.Persistence.Migrations
                 SET IDENTITY_INSERT Products OFF;
 
                 -- Product Images
-                SET IDENTITY_INSERT ProductImage ON;
-                INSERT INTO ProductImage (Id, ProductId, FileName) VALUES
+                SET IDENTITY_INSERT ProductImages ON;
+                INSERT INTO ProductImages (Id, ProductId, FileName) VALUES
                 (1, 1, '1-1.png'), (2, 1, '1-2.png'),
                 (3, 2, '2-1.png'), (4, 2, '2-2.png'),
                 (5, 3, '3-1.png'), (6, 3, '3-2.png'),
@@ -52,7 +52,7 @@ namespace eMarket.Persistence.Migrations
                 (19, 10, '10-1.png'), (20, 10, '10-2.png'),
                 (21, 11, '11-1.png'), (22, 11, '11-2.png'),
                 (23, 12, '12-1.png'), (24, 12, '12-2.png');
-                SET IDENTITY_INSERT ProductImage OFF;
+                SET IDENTITY_INSERT ProductImages OFF;
 
                 -- CategoryProduct (join table)
                 INSERT INTO CategoryProduct (CategoriesId, ProductsId) VALUES
